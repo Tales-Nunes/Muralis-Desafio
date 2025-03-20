@@ -33,7 +33,7 @@ public class ClientController {
         List<Client> client = clientService.findByName(nome);
         return ResponseEntity.ok().body(client);
     }
-    @GetMapping(value = "/{nome}")
+    @GetMapping(value = "/{cpf}")
     public ResponseEntity<Client> findByCpf(@PathVariable String cpf){
         Client client = clientService.findByCpf(cpf);
         return ResponseEntity.ok().body(client);
