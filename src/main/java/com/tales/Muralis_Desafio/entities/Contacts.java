@@ -1,6 +1,6 @@
 package com.tales.Muralis_Desafio.entities;
 
-import com.tales.Muralis_Desafio.Enums.ContactType;
+import com.tales.Muralis_Desafio.enums.ContactType;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 

@@ -1,4 +1,4 @@
-package com.tales.Muralis_Desafio.Enums;
+package com.tales.Muralis_Desafio.enums;
 
 public enum ContactType {
     TELEFONE(1),
