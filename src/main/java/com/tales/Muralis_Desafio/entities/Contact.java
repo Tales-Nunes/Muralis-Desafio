@@ -16,7 +16,7 @@ public class Contact implements Serializable {
     private Long Id;
 
     @ManyToOne
-    @JoinColumn(name ="client_id")
+    @JoinColumn(name ="client_id", nullable = false)
     private Client client;
 
     //RN02: Os campos Tipo do Contato e Valor do Contato são obrigatórios no cadastro do contato;

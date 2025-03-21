@@ -1,5 +1,7 @@
 package com.tales.Muralis_Desafio.entities;
 
+import jakarta.validation.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -18,11 +20,12 @@ public class Client implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //RN01: Os campos Nome e CPF são obrigatórios no cadastro do cliente;
-    @NotNull
+
+    @NotBlank(message = "O nome do cliente não pode estar vazio!")
     private String name;
 
     //RN03: O CPF informado deve ser único no sistema;
-    @NotNull
+    @NotBlank(message = "O cpf do cliente não pode estar vazio!")
     @Column(unique = true)
     private String cpf;
 

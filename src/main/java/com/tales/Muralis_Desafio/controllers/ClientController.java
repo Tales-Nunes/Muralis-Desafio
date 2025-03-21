@@ -3,6 +3,7 @@ package com.tales.Muralis_Desafio.controllers;
 import com.tales.Muralis_Desafio.entities.Client;
 import com.tales.Muralis_Desafio.repositories.ClientRepository;
 import com.tales.Muralis_Desafio.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<Client> insert(@RequestBody Client client){
+    public ResponseEntity<Client> insert(@Valid @RequestBody Client client){
         client = clientService.insert(client);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
         return ResponseEntity.created(uri).body(client);
