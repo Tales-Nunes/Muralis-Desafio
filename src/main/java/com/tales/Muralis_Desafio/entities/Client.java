@@ -3,7 +3,6 @@ package com.tales.Muralis_Desafio.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.NotFound;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class Client implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<Contacts> contacts = new ArrayList<>();
+    private List<Contact> contacts = new ArrayList<>();
 
     public Client() {}
 
@@ -86,7 +85,7 @@ public class Client implements Serializable {
         this.adress = adress;
     }
 
-    public List<Contacts> getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
