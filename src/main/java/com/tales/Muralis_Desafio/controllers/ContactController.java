@@ -26,5 +26,11 @@ public class ContactController {
         return ResponseEntity.ok().body(contacts);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Contact>> findByClientId(@PathVariable Long id){
+        List<Contact> contacts = contactService.findByClientId(id);
+        return ResponseEntity.ok().body(contacts);
+    }
+
 
 }

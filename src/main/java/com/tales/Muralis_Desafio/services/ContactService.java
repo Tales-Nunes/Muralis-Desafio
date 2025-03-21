@@ -18,4 +18,7 @@ public class ContactService {
     }
 
 
+    public List<Contact> findByClientId(Long id) {
+        return contactRepository.findByClientId(id);
+    }
 }

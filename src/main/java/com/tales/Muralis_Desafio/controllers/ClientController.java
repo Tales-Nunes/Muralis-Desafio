@@ -28,12 +28,12 @@ public class ClientController {
     }
 
     //RF05: O sistema deve permitir a busca de um cliente pelo Nome ou CPF;
-    @GetMapping(value = "/{nome}")
+    @GetMapping(value = "/nome/{nome}")
     public ResponseEntity<List<Client>> findByName(@PathVariable String nome){
         List<Client> client = clientService.findByName(nome);
         return ResponseEntity.ok().body(client);
     }
-    @GetMapping(value = "/{cpf}")
+    @GetMapping(value = "/cpf/{cpf}")
     public ResponseEntity<Client> findByCpf(@PathVariable String cpf){
         Client client = clientService.findByCpf(cpf);
         return ResponseEntity.ok().body(client);
