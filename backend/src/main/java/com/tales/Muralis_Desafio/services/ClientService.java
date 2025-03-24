@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -22,10 +23,15 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
+    public Client findById(Long id){
+        Optional<Client> client = clientRepository.findById(id);
+        return client.orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
     public List<Client> findByName(String name) {
         List<Client> clients = clientRepository.findByName(name);
         if (clients.isEmpty()) {
-            throw new ResourceNotFoundException("Nenhum cliente encontrado com o nome: " + name);
+            throw new ResourceNotFoundException("Customer not found with name: " + name);
         }
         return clients;
     }
@@ -33,7 +39,7 @@ public class ClientService {
     public Client findByCpf(String cpf) {
         Client client = clientRepository.findByCpf(cpf);
         if (client == null) {
-            throw new ResourceNotFoundException("Cliente não encontrado com o CPF: " + cpf);
+            throw new ResourceNotFoundException("Customer not found with CPF: " + cpf);
         }
         return client;
     }
@@ -67,7 +73,7 @@ public class ClientService {
         entity.setName(client.getName());
         entity.setCpf(client.getCpf());
         entity.setBirthday(client.getBirthday());
-        entity.setAdress(client.getAdress());
+        entity.setAddress(client.getAddress());
 
     }
 }

@@ -19,21 +19,33 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
+
+
     @GetMapping
     public ResponseEntity<List<Contact>> findAll(){
         List<Contact> contacts = contactService.findAll();
         return ResponseEntity.ok().body(contacts);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "contact/{id}")
+    public ResponseEntity<Contact> findById(@PathVariable Long id){
+        Contact contact = contactService.findById(id);
+        return ResponseEntity.ok().body(contact);
+    }
+
+    @GetMapping("client/{id}")
     public ResponseEntity<List<Contact>> findByClientId(@PathVariable Long id){
         List<Contact> contacts = contactService.findByClientId(id);
         return ResponseEntity.ok().body(contacts);
     }
 
     @PostMapping
-    public ResponseEntity<Contact> insert(@RequestBody Contact contact){
+    public ResponseEntity<Contact> insert(@RequestBody Contact contact) {
+        if (contact.getClient() == null || contact.getClient().getId() == null) {
+            throw new IllegalArgumentException("client_id is mandatory.");
+        }
         contact = contactService.insert(contact);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(contact.getId()).toUri();
         return ResponseEntity.created(uri).body(contact);
     }
@@ -44,10 +56,10 @@ public class ContactController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Contact> update(@PathVariable Long id, @RequestBody Contact contact) {
-        contact = contactService.update(id, contact);
-        return ResponseEntity.ok().body(contact);
+        Contact updatedContact = contactService.update(id, contact);
+        return ResponseEntity.ok().body(updatedContact);
     }
 
 }

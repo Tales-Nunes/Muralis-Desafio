@@ -19,7 +19,6 @@ public class Contact implements Serializable {
     @JoinColumn(name ="client_id", nullable = false)
     private Client client;
 
-    //RN02: Os campos Tipo do Contato e Valor do Contato são obrigatórios no cadastro do contato;
     @NotNull
     private ContactType contactType;
 

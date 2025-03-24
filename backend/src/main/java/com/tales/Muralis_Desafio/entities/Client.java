@@ -4,9 +4,12 @@ import jakarta.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Past;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,20 +22,19 @@ public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //RN01: Os campos Nome e CPF são obrigatórios no cadastro do cliente;
 
-    @NotBlank(message = "O nome do cliente não pode estar vazio!")
+    @NotBlank(message = "Client name cannot be empty")
     private String name;
 
-    //RN03: O CPF informado deve ser único no sistema;
-    @NotBlank(message = "O cpf do cliente não pode estar vazio!")
+    @NotBlank(message = "Client CPF cannot be empty!")
     @Column(unique = true)
+    @CPF
     private String cpf;
 
-    //RN05: A Data de Nascimento deve ser válida;
-    private Date birthday;
+    @Past(message = "the BirthDate should be in the past")
+    private LocalDate birthday;
 
-    private String adress;
+    private String address;
 
     @JsonIgnore
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -40,12 +42,12 @@ public class Client implements Serializable {
 
     public Client() {}
 
-    public Client(Long id, String name, String cpf, Date birthday, String adress) {
+    public Client(Long id, String name, String cpf, LocalDate birthday, String address) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.birthday = birthday;
-        this.adress = adress;
+        this.address = address;
     }
 
     public Long getId() {
@@ -72,20 +74,20 @@ public class Client implements Serializable {
         this.cpf = cpf;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public List<Contact> getContacts() {

@@ -20,17 +20,21 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    //RF04: O sistema deve permitir a listagem de todos os clientes cadastrados;
     @GetMapping
     public ResponseEntity<List<Client>> findAll(){
         List<Client> clients = clientService.findAll();
         return ResponseEntity.ok().body(clients);
     }
 
-    //RF05: O sistema deve permitir a busca de um cliente pelo Nome ou CPF;
-    @GetMapping(value = "/nome/{nome}")
-    public ResponseEntity<List<Client>> findByName(@PathVariable String nome){
-        List<Client> client = clientService.findByName(nome);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Client> findById(@PathVariable Long id){
+        Client client = clientService.findById(id);
+        return ResponseEntity.ok().body(client);
+    }
+
+    @GetMapping(value = "/name/{name}")
+    public ResponseEntity<List<Client>> findByName(@PathVariable String name){
+        List<Client> client = clientService.findByName(name);
         return ResponseEntity.ok().body(client);
     }
     @GetMapping(value = "/cpf/{cpf}")
