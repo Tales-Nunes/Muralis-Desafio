@@ -63,7 +63,7 @@ const ClientSearch = () => {
             <ul className="list-group">
                 {results.map(client => (
                     <li key={client.id} className="list-group-item d-flex justify-content-between align-items-center">
-                        <span>{client.name} - {client.cpf}</span>
+                        <span>{client.name} - {client.cpf} - {client.birthday} - {client.address}</span>
                         <Link to={`/clients/${client.id}/contacts`} className="btn btn-outline-secondary btn-sm">Ver Contatos</Link>
                     </li>
                 ))}

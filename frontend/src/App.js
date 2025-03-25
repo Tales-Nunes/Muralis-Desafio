@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import ClientList from './components/ClientList';
 import ClientForm from './components/ClientForm';
 import ContactList from './components/ContactList';
@@ -15,6 +15,7 @@ function App() {
                 <Navbar />
                 <div className="container mt-4">
                     <Routes>
+                        <Route path="/" element={<Navigate to="/clients" replace />} />
                         <Route path="/clients" element={<ClientList />} />
                         <Route path="/clients/new" element={<ClientForm />} />
                         <Route path="/clients/:id" element={<ClientForm />} />
